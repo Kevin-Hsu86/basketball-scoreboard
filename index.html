@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>籃球電子計分板</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+    }
+    h1 { margin: 20px 0 10px; }
+    .board {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+    .team {
+      background: #222;
+      border-radius: 12px;
+      padding: 20px;
+      width: 260px;
+    }
+    .team input {
+      font-size: 22px;
+      text-align: center;
+      width: 90%;
+      background: #333;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 6px;
+    }
+    .score {
+      font-size: 96px;
+      font-weight: bold;
+      color: #ffcc00;
+      margin: 15px 0;
+    }
+    button {
+      font-size: 18px;
+      margin: 4px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #ff7a00;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover { background: #ff9500; }
+    button.minus { background: #555; }
+    .reset { background: #c0392b; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>🏀 籃球電子計分板</h1>
+
+  <div class="board">
+    <div class="team">
+      <input id="nameA" value="主隊">
+      <div class="score" id="scoreA">0</div>
+      <button onclick="addScore('A', 1)">+1</button>
+      <button onclick="addScore('A', 2)">+2</button>
+      <button onclick="addScore('A', 3)">+3</button>
+      <br>
+      <button class="minus" onclick="addScore('A', -1)">-1</button>
+    </div>
+
+    <div class="team">
+      <input id="nameB" value="客隊">
+      <div class="score" id="scoreB">0</div>
+      <button onclick="addScore('B', 1)">+1</button>
+      <button onclick="addScore('B', 2)">+2</button>
+      <button onclick="addScore('B', 3)">+3</button>
+      <br>
+      <button class="minus" onclick="addScore('B', -1)">-1</button>
+    </div>
+  </div>
+
+  <button class="reset" onclick="resetAll()">全部歸零</button>
+
+  <script>
+    var scores = { A: 0, B: 0 };
+
+    function addScore(team, points) {
+      scores[team] = scores[team] + points;
+      if (scores[team] < 0) {
+        scores[team] = 0;
+      }
+      document.getElementById('score' + team).textContent = scores[team];
+    }
+
+    function resetAll() {
+      scores.A = 0;
+      scores.B = 0;
+      document.getElementById('scoreA').textContent = 0;
+      document.getElementById('scoreB').textContent = 0;
+    }
+  </script>
+</body>
+</html>
