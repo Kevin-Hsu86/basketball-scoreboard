@@ -1,6 +1,8 @@
 # basketball-scoreboard
 籃球比賽電子計分板# 籃球電子計分板
+## 線上使用
 
+直接打開：[籃球電子計分板](https://kevin-hsu86.github.io/basketball-scoreboard/)
 一個簡單的網頁計分板，用瀏覽器打開就能記錄籃球比賽的比分。
 
 ## 功能
