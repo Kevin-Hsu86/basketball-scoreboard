@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10131b">
   <title>籃球電子計分板</title>
+
   <style>
     :root {
       color-scheme: dark;
@@ -65,7 +66,8 @@
       text-align: center;
     }
 
-    input:focus-visible, button:focus-visible {
+    input:focus-visible,
+    button:focus-visible {
       outline: 3px solid #8bc7ff;
       outline-offset: 2px;
     }
@@ -189,7 +191,8 @@
       align-items: stretch;
     }
 
-    .team, .center-panel {
+    .team,
+    .center-panel {
       border: 1px solid var(--line);
       border-radius: 16px;
       background: linear-gradient(155deg, #222a37, #171c25);
@@ -242,6 +245,7 @@
     }
 
     .stat-value.warn { color: var(--red); }
+
     .small-controls { gap: 2px; }
 
     .small-controls button {
@@ -291,8 +295,10 @@
       line-height: 1.6;
     }
 
+    /* 平板與手機直向：完整功能，內容可自然往下排列 */
     @media (max-width: 760px) {
       body { padding: 12px; }
+
       .board { grid-template-columns: 1fr 1fr; }
 
       .center-panel {
@@ -301,6 +307,7 @@
         flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
+        justify-content: center;
       }
 
       .team { min-width: 0; }
@@ -327,7 +334,7 @@
       .stat-label { font-size: .85rem; }
     }
 
-    /* 手機直向精簡版 */
+    /* 手機直向完整版：顯示每節時間與初始暫停數設定 */
     @media (orientation: portrait) and (max-width: 600px) {
       body {
         min-height: 100dvh;
@@ -339,20 +346,20 @@
       .toolbar { margin: 0 0 5px; gap: 3px; }
 
       .toolbar button {
-        min-height: 27px;
+        min-height: 30px;
         margin: 0;
         padding: 4px 9px;
         font-size: .78rem;
       }
 
       .period-bar {
-        margin: 0 auto;
-        padding: 2px 8px;
+        margin: 0 auto 8px;
+        padding: 3px 8px;
         gap: 4px;
       }
 
       .period-bar button {
-        min-height: 26px;
+        min-height: 30px;
         margin: 0;
         padding: 2px 10px;
       }
@@ -363,320 +370,117 @@
       }
 
       .main-timers {
-        gap: 5px;
-        margin: 5px 0;
+        gap: 7px;
+        margin: 6px 0 10px;
       }
 
       .timer-card {
-        flex: 1 1 0;
+        flex: 1 1 100%;
         min-width: 0;
-        padding: 4px 6px;
-        border-radius: 9px;
+        padding: 8px;
+        border-radius: 10px;
       }
 
-      .timer-label { font-size: .68rem; }
+      .timer-label { font-size: .75rem; }
 
       .clock {
-        font-size: clamp(2rem, 8.5vh, 2.8rem);
+        font-size: clamp(2.7rem, 8vh, 3.5rem);
         line-height: 1;
       }
 
-      .timer-row { gap: 2px; }
+      .timer-row { gap: 3px; }
 
       .timer-row button {
-        min-height: 27px;
+        min-height: 34px;
         margin: 2px;
-        padding: 3px 8px;
-        font-size: .76rem;
+        padding: 4px 10px;
+        font-size: .82rem;
       }
 
-      .duration-setting,
-      .possession-block,
-      .rule-setting,
-      .bottom-actions,
-      .help {
-        display: none;
+      .duration-setting {
+        display: block;
+        margin-top: 6px;
+        font-size: .8rem;
+      }
+
+      .duration-setting input {
+        width: 58px;
+        padding: 4px;
+      }
+
+      .possession-block {
+        gap: 4px;
+        margin-top: 7px;
+        padding-top: 6px;
+        font-size: .75rem;
+      }
+
+      .possession {
+        min-height: 36px;
+        font-size: .82rem;
       }
 
       .board {
         width: 100%;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: auto auto;
         gap: 7px;
-        padding: 5px 0;
+        padding: 0;
       }
 
-      .team, .center-panel {
+      .team,
+      .center-panel {
         min-height: 0;
-        padding: 5px;
-        border-radius: 9px;
+        padding: 8px 6px;
+        border-radius: 10px;
       }
 
       .team-name {
-        min-height: 27px;
+        min-height: 32px;
         padding: 3px 6px;
-        font-size: .9rem;
+        font-size: .95rem;
       }
 
       .score {
-        margin: 1px 0 3px;
-        font-size: clamp(3rem, 12vh, 4rem);
+        margin: 4px 0;
+        font-size: clamp(3.2rem, 10vh, 4.2rem);
         line-height: .95;
       }
 
       .score-buttons button {
         min-width: 44px;
-        min-height: 28px;
+        min-height: 34px;
         margin: 2px;
         padding: 3px 7px;
         font-size: .9rem;
       }
 
-      .team-controls {
-        gap: 2px;
-        margin-top: 0;
-      }
+      .team-controls { margin-top: 0; }
 
       .team-controls button {
-        min-height: 25px;
-        margin: 1px;
-        padding: 2px 7px;
-        font-size: .74rem;
+        min-height: 30px;
+        margin: 2px;
+        padding: 3px 8px;
+        font-size: .78rem;
       }
 
       .stat-row {
-        gap: 3px;
-        margin-top: 4px;
-        padding-top: 3px;
-      }
-
-      .stat-label { font-size: .7rem; }
-
-      .stat-value {
-        min-width: 20px;
-        font-size: 1.05rem;
-      }
-
-      .small-controls { gap: 1px; }
-
-      .small-controls button {
-        min-width: 28px;
-        min-height: 24px;
-        margin: 1px;
-        padding: 1px 5px;
-        font-size: .7rem;
-      }
-
-      .center-panel {
-        grid-column: 1 / -1;
-        grid-row: 2;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 7px;
-      }
-    }
-
-    /* 手機橫向三欄：比賽時間｜比分｜進攻時間 */
-    @media (orientation: landscape) and (max-width: 1400px) {
-      body {
-        height: 100svh;
-        min-height: 0;
-        overflow: hidden;
-        display: grid;
-        grid-template-columns: minmax(145px, 1fr) minmax(0, 2.35fr) minmax(145px, 1fr);
-        grid-template-rows: auto auto auto minmax(0, 1fr) auto;
-        grid-template-areas:
-          "title title title"
-          "tools tools tools"
-          "period period period"
-          "game board shot"
-          "actions actions actions";
-        align-items: stretch;
-        gap: 4px 7px;
-        padding: 4px max(6px, env(safe-area-inset-left)) 4px max(6px, env(safe-area-inset-right));
-      }
-
-      h1 {
-        grid-area: title;
-        display: block;
-        margin: 0;
-        font-size: clamp(.85rem, 3vh, 1.15rem);
-        line-height: 1.1;
-      }
-
-      .toolbar {
-        grid-area: tools;
-        margin: 0;
-        gap: 3px;
-      }
-
-      .toolbar button {
-        min-height: 28px;
-        margin: 0;
-        padding: 2px 8px;
-        font-size: clamp(.62rem, 2vh, .78rem);
-      }
-
-      .period-bar {
-        grid-area: period;
-        margin: 0 auto;
-        padding: 1px 8px;
-      }
-
-      .period-bar button {
-        min-height: 24px;
-        margin: 0;
-        padding: 1px 8px;
-      }
-
-      .period-number {
-        min-width: 72px;
-        font-size: .8rem;
-      }
-
-      .main-timers { display: contents; }
-
-      .timer-card {
-        min-width: 0;
-        align-self: stretch;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 5px;
-        border-radius: 8px;
-      }
-
-      .timer-card:first-child { grid-area: game; }
-      .timer-card:last-child { grid-area: shot; }
-      .timer-label { font-size: clamp(.6rem, 1.8vh, .75rem); }
-
-      .clock {
-        font-size: clamp(1.25rem, 5.5vh, 2rem);
-        line-height: 1;
-        white-space: nowrap;
-        letter-spacing: -.06em;
-      }
-
-      #gameClock { font-size: clamp(1.2rem, 5vh, 1.8rem); }
-      .timer-row { gap: 2px; }
-
-      .timer-row button {
-        min-height: 32px;
-        margin: 2px 1px;
-        padding: 2px 5px;
-        font-size: clamp(.58rem, 1.8vh, .72rem);
-      }
-
-      .duration-setting {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 2px;
-        margin-top: 4px;
-        font-size: clamp(.55rem, 1.6vh, .68rem);
-      }
-
-      .duration-setting input {
-        width: 38px;
-        padding: 2px;
-      }
-
-      .duration-setting button {
-        min-height: 25px;
-        margin: 1px;
-        padding: 1px 5px;
-        font-size: .62rem;
-      }
-
-      .possession-block {
-        gap: 2px;
-        margin-top: 5px;
-        padding-top: 4px;
-        font-size: .62rem;
-      }
-
-      .possession-block .possession {
-        min-height: 32px;
-        padding: 2px 4px;
-        font-size: .68rem;
-      }
-
-      .board {
-        grid-area: board;
-        min-height: 0;
-        width: 100%;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        grid-template-rows: minmax(0, 1fr) auto;
         gap: 4px;
-        padding: 0;
+        margin-top: 8px;
+        padding-top: 6px;
       }
 
-      .team {
-        min-height: 0;
-        padding: 4px;
-        border-radius: 8px;
-      }
-
-      .team-name {
-        min-height: 26px;
-        padding: 2px 5px;
-        font-size: clamp(.75rem, 2.4vh, .95rem);
-      }
-
-      .score {
-        margin: 1px 0 3px;
-        font-size: clamp(2.6rem, 11vh, 4rem);
-        line-height: .92;
-      }
-
-      .score-buttons button {
-        min-width: 38px;
-        min-height: 32px;
-        margin: 1px;
-        padding: 2px 5px;
-        font-size: clamp(.75rem, 2.3vh, .92rem);
-      }
-
-      .team-controls { margin: 0; }
-
-      .team-controls button {
-        min-height: 27px;
-        margin: 1px;
-        padding: 2px 6px;
-        font-size: .68rem;
-      }
-
-      .stat-row {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 2px 4px;
-        margin-top: 2px;
-        padding-top: 2px;
-        line-height: 1.05;
-      }
-
-      .stat-label { font-size: clamp(.6rem, 1.8vh, .75rem); }
+      .stat-label { font-size: .78rem; }
 
       .stat-value {
-        min-width: 18px;
-        font-size: 1rem;
-      }
-
-      .team .stat-row .small-controls {
-        grid-column: 1 / -1;
-        justify-content: center;
-      }
-
-      .team .stat-row:last-child {
-        margin-top: clamp(8px, 2vh, 15px);
+        min-width: 22px;
+        font-size: 1.15rem;
       }
 
       .small-controls { gap: 2px; }
 
       .small-controls button {
-        min-width: 36px;
+        min-width: 34px;
         min-height: 30px;
         margin: 1px;
         padding: 2px 6px;
@@ -686,47 +490,204 @@
       .center-panel {
         grid-column: 1 / -1;
         grid-row: 2;
+        gap: 6px;
+        padding: 10px;
+      }
+
+      .center-panel h2 { font-size: .85rem; }
+      .rule-setting { display: flex; align-items: center; gap: 8px; }
+      .rule-setting input { width: 56px; margin: 0; }
+      .status { min-height: 0; font-size: .75rem; }
+    }
+
+    /* 手機橫向精簡版：左計時、中比分、右進攻計時 */
+    @media (orientation: landscape) and (max-width: 1400px) {
+      body {
+        width: 100%;
+        height: 100svh;
         min-height: 0;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 4px 8px;
-        padding: 3px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(130px, 1fr) minmax(0, 2.3fr) minmax(130px, 1fr);
+        grid-template-rows: auto auto minmax(0, 1fr);
+        grid-template-areas:
+          "tools tools tools"
+          "period period period"
+          "game board shot";
+        align-items: stretch;
+        gap: 3px 6px;
+        padding: 4px max(5px, env(safe-area-inset-left)) 4px max(5px, env(safe-area-inset-right));
       }
 
-      .center-panel h2 { display: none; }
+      h1 { display: none; }
 
-      .rule-setting {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-size: .65rem;
-      }
-
-      .rule-setting input {
-        width: 40px;
-        padding: 2px;
-      }
-
-      .status { min-height: 0; font-size: .6rem; }
-
-      .bottom-actions {
-        grid-area: actions;
+      .toolbar {
+        grid-area: tools;
         margin: 0;
+        gap: 3px;
       }
 
-      .bottom-actions button {
+      .toolbar button {
+        min-height: 27px;
+        margin: 0;
+        padding: 2px 8px;
+        font-size: clamp(.62rem, 2vh, .78rem);
+      }
+
+      .period-bar {
+        grid-area: period;
+        margin: 0 auto;
+        padding: 1px 7px;
+      }
+
+      .period-bar button {
+        min-height: 24px;
+        margin: 0;
+        padding: 1px 8px;
+      }
+
+      .period-number {
+        min-width: 70px;
+        font-size: .78rem;
+      }
+
+      .main-timers { display: contents; }
+
+      .timer-card {
+        min-width: 0;
+        min-height: 0;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px 4px;
+        border-radius: 8px;
+      }
+
+      .timer-card:first-child { grid-area: game; }
+      .timer-card:last-child { grid-area: shot; }
+      .timer-label { font-size: clamp(.58rem, 1.8vh, .72rem); }
+
+      .clock {
+        font-size: clamp(1.2rem, 5.2vh, 1.8rem);
+        line-height: 1;
+        white-space: nowrap;
+        letter-spacing: -.06em;
+      }
+
+      .timer-row { gap: 1px; }
+
+      .timer-row button {
+        min-height: 30px;
+        margin: 1px;
+        padding: 2px 4px;
+        font-size: clamp(.55rem, 1.6vh, .68rem);
+      }
+
+      .duration-setting,
+      .center-panel,
+      .bottom-actions,
+      .help,
+      .timeout-row {
+        display: none !important;
+      }
+
+      .possession-block {
+        gap: 2px;
+        margin-top: 5px;
+        padding-top: 4px;
+        font-size: .58rem;
+      }
+
+      .possession {
+        min-height: 30px;
+        padding: 2px;
+        font-size: .66rem;
+      }
+
+      .board {
+        grid-area: board;
+        min-width: 0;
+        min-height: 0;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr);
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .team {
+        min-width: 0;
+        min-height: 0;
+        padding: 4px;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .team-name {
         min-height: 25px;
-        margin: 0 2px;
-        padding: 2px 6px;
-        font-size: .62rem;
+        padding: 2px 4px;
+        font-size: clamp(.72rem, 2.2vh, .9rem);
       }
 
-      .help { display: none; }
+      .score {
+        margin: 1px 0 2px;
+        font-size: clamp(2.2rem, 10vh, 3.8rem);
+        line-height: .9;
+      }
+
+      .score-buttons button {
+        min-width: 36px;
+        min-height: 30px;
+        margin: 1px;
+        padding: 2px 5px;
+        font-size: clamp(.72rem, 2.2vh, .9rem);
+      }
+
+      .team-controls { margin: 0; }
+
+      .team-controls button {
+        min-height: 26px;
+        margin: 1px;
+        padding: 1px 6px;
+        font-size: .68rem;
+      }
+
+      .stat-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 1px 4px;
+        margin-top: 3px;
+        padding-top: 2px;
+      }
+
+      .stat-label { font-size: clamp(.58rem, 1.7vh, .72rem); }
+
+      .stat-value {
+        min-width: 18px;
+        font-size: .95rem;
+      }
+
+      .team .stat-row:not(.timeout-row) .small-controls {
+        grid-column: 1 / -1;
+        justify-content: center;
+      }
+
+      .small-controls { gap: 2px; }
+
+      .small-controls button {
+        min-width: 34px;
+        min-height: 28px;
+        margin: 1px;
+        padding: 1px 6px;
+        font-size: .75rem;
+      }
     }
   </style>
 </head>
+
 <body>
   <h1>🏀 籃球電子計分板</h1>
 
@@ -789,7 +750,7 @@
       <div class="team-controls">
         <button class="secondary" type="button" onclick="addScore('A',-1)">−1 分</button>
       </div>
-      <div class="stat-row">
+      <div class="stat-row foul-row">
         <span class="stat-label">團隊犯規</span>
         <span class="stat-value" id="foulsA">0</span>
         <span class="small-controls">
@@ -797,7 +758,7 @@
           <button class="secondary" type="button" onclick="changeStat('fouls','A',-1)" aria-label="主隊犯規減一">−</button>
         </span>
       </div>
-      <div class="stat-row">
+      <div class="stat-row timeout-row">
         <span class="stat-label">暫停</span>
         <span class="stat-value" id="timeoutsA">2</span>
         <span class="small-controls">
@@ -827,7 +788,7 @@
       <div class="team-controls">
         <button class="secondary" type="button" onclick="addScore('B',-1)">−1 分</button>
       </div>
-      <div class="stat-row">
+      <div class="stat-row foul-row">
         <span class="stat-label">團隊犯規</span>
         <span class="stat-value" id="foulsB">0</span>
         <span class="small-controls">
@@ -835,7 +796,7 @@
           <button class="secondary" type="button" onclick="changeStat('fouls','B',-1)" aria-label="客隊犯規減一">−</button>
         </span>
       </div>
-      <div class="stat-row">
+      <div class="stat-row timeout-row">
         <span class="stat-label">暫停</span>
         <span class="stat-value" id="timeoutsB">2</span>
         <span class="small-controls">
@@ -1207,6 +1168,7 @@
       }
 
       const key = event.key.toLowerCase();
+
       const shortcuts = {
         '1': () => addScore('A', 1),
         '2': () => addScore('A', 2),
