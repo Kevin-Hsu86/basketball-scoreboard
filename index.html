@@ -20,7 +20,9 @@
       --red: #ff5a57;
       --purple: #a66bdb;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       min-height: 100vh;
@@ -30,8 +32,14 @@
       font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
       text-align: center;
     }
+
     button, input { font: inherit; }
-    h1 { margin: 4px 0 18px; font-size: clamp(1.45rem, 3vw, 2rem); }
+
+    h1 {
+      margin: 4px 0 18px;
+      font-size: clamp(1.45rem, 3vw, 2rem);
+    }
+
     button {
       min-height: 42px;
       margin: 4px;
@@ -44,12 +52,14 @@
       cursor: pointer;
       transition: filter .15s, transform .08s;
     }
+
     button:hover { filter: brightness(1.12); }
     button:active { transform: scale(.97); }
     button.secondary { background: #505b6d; }
     button.purple { background: #70449a; }
     button.danger { background: #b93b3b; }
     button.active { outline: 2px solid white; outline-offset: 2px; }
+
     input {
       min-width: 0;
       border: 1px solid var(--line);
@@ -59,15 +69,27 @@
       color: var(--text);
       text-align: center;
     }
-    input:focus-visible, button:focus-visible { outline: 3px solid #8bc7ff; outline-offset: 2px; }
-    .toolbar, .period-bar, .timer-row, .team-controls, .small-controls {
+
+    input:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #8bc7ff;
+      outline-offset: 2px;
+    }
+
+    .toolbar,
+    .period-bar,
+    .timer-row,
+    .team-controls,
+    .small-controls {
       display: flex;
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       gap: 6px;
     }
+
     .toolbar { margin: 0 auto 12px; }
+
     .period-bar {
       width: fit-content;
       margin: 0 auto 14px;
@@ -76,7 +98,13 @@
       border-radius: 12px;
       background: #171c26;
     }
-    .period-number { min-width: 110px; font-size: 1.2rem; font-weight: 800; }
+
+    .period-number {
+      min-width: 110px;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
     .main-timers {
       display: flex;
       justify-content: center;
@@ -85,6 +113,7 @@
       gap: 12px;
       margin: 0 auto 14px;
     }
+
     .timer-card {
       min-width: min(290px, 100%);
       padding: 12px 18px;
@@ -92,7 +121,14 @@
       border-radius: 14px;
       background: linear-gradient(145deg, #252d3b, #171c26);
     }
-    .timer-label { color: var(--muted); font-size: .9rem; font-weight: 700; letter-spacing: .08em; }
+
+    .timer-label {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
     .clock {
       font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
       font-size: clamp(3.4rem, 10vw, 5.4rem);
@@ -101,12 +137,30 @@
       color: var(--green);
       font-variant-numeric: tabular-nums;
     }
-    .clock.expired { color: var(--red); animation: blink 1s infinite; }
+
+    .clock.expired {
+      color: var(--red);
+      animation: blink 1s infinite;
+    }
+
     #shotClock { color: var(--yellow); }
     #shotClock.expired { color: var(--red); }
-    @keyframes blink { 50% { opacity: .35; } }
-    .duration-setting { margin-top: 8px; color: var(--muted); font-size: .9rem; }
-    .duration-setting input { width: 64px; padding: 5px; }
+
+    @keyframes blink {
+      50% { opacity: .35; }
+    }
+
+    .duration-setting {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .duration-setting input {
+      width: 64px;
+      padding: 5px;
+    }
+
     .board {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(180px, .7fr) minmax(0, 1fr);
@@ -115,13 +169,21 @@
       margin: 0 auto;
       align-items: stretch;
     }
-    .team, .center-panel {
+
+    .team,
+    .center-panel {
       border: 1px solid var(--line);
       border-radius: 16px;
       background: linear-gradient(155deg, #222a37, #171c25);
       padding: clamp(12px, 2vw, 20px);
     }
-    .team-name { width: 100%; font-size: 1.3rem; font-weight: 800; }
+
+    .team-name {
+      width: 100%;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
     .score {
       margin: 5px 0 8px;
       color: var(--yellow);
@@ -130,8 +192,14 @@
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
-    .score-buttons button { min-width: 60px; font-size: 1.15rem; }
+
+    .score-buttons button {
+      min-width: 60px;
+      font-size: 1.15rem;
+    }
+
     .team-controls { margin-top: 3px; }
+
     .stat-row {
       display: flex;
       align-items: center;
@@ -142,13 +210,41 @@
       border-top: 1px solid var(--line);
       text-align: left;
     }
-    .stat-label { color: var(--muted); font-weight: 700; }
-    .stat-value { min-width: 28px; text-align: center; font-size: 1.6rem; font-weight: 900; }
+
+    .stat-label {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .stat-value {
+      min-width: 28px;
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 900;
+    }
+
     .stat-value.warn { color: var(--red); }
     .small-controls { gap: 2px; }
-    .small-controls button { min-width: 40px; min-height: 36px; padding: 5px 10px; }
-    .center-panel { display: flex; flex-direction: column; justify-content: center; gap: 14px; }
-    .center-panel h2 { margin: 0; font-size: 1rem; color: var(--muted); }
+
+    .small-controls button {
+      min-width: 40px;
+      min-height: 36px;
+      padding: 5px 10px;
+    }
+
+    .center-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .center-panel h2 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
     .possession {
       min-height: 70px;
       border: 1px solid #576477;
@@ -156,24 +252,68 @@
       background: var(--panel-soft);
       font-size: 1.05rem;
     }
-    .rule-setting { display: grid; gap: 6px; color: var(--muted); font-size: .85rem; }
-    .rule-setting input { width: 80px; margin: 0 auto; }
+
+    .rule-setting {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .rule-setting input {
+      width: 80px;
+      margin: 0 auto;
+    }
+
     .bottom-actions { margin: 14px auto 8px; }
-    .help { max-width: 850px; margin: 12px auto 0; color: var(--muted); font-size: .84rem; line-height: 1.6; }
-    .status { min-height: 1.3em; color: var(--green); font-size: .85rem; }
+
+    .help {
+      max-width: 850px;
+      margin: 12px auto 0;
+      color: var(--muted);
+      font-size: .84rem;
+      line-height: 1.6;
+    }
+
+    .status {
+      min-height: 1.3em;
+      color: var(--green);
+      font-size: .85rem;
+    }
+
     @media (max-width: 760px) {
       body { padding: 12px; }
+
       .board { grid-template-columns: 1fr 1fr; }
-      .center-panel { grid-column: 1 / -1; grid-row: 2; flex-direction: row; flex-wrap: wrap; align-items: center; }
+
+      .center-panel {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
       .team { min-width: 0; }
       .team-controls button { padding: 8px 12px; }
     }
+
     @media (max-width: 430px) {
       .board { gap: 8px; }
       .team { padding: 10px 7px; }
       .team-name { font-size: 1.05rem; }
-      .score-buttons button { min-width: 48px; padding: 8px; }
-      .team-controls button { margin: 2px; padding: 7px 9px; font-size: .9rem; }
+
+      .score-buttons button {
+        min-width: 48px;
+        padding: 8px;
+      }
+
+      .team-controls button {
+        margin: 2px;
+        padding: 7px 9px;
+        font-size: .9rem;
+      }
+
       .stat-row { gap: 3px; }
       .stat-label { font-size: .85rem; }
     }
@@ -185,8 +325,10 @@
         overflow-x: hidden;
         padding: 8px;
       }
+
       h1 { display: none; }
       .toolbar { margin: 0 0 5px; gap: 3px; }
+
       .toolbar button {
         min-height: 27px;
         margin: 0;
@@ -194,45 +336,141 @@
         border-radius: 7px;
         font-size: .78rem;
       }
+
       .period-bar {
         margin: 0 auto;
         padding: 2px 8px;
         gap: 4px;
       }
-      .period-bar button { min-height: 26px; margin: 0; padding: 2px 10px; }
-      .period-number { min-width: 78px; font-size: .95rem; }
-      .main-timers { gap: 5px; margin: 5px 0; }
+
+      .period-bar button {
+        min-height: 26px;
+        margin: 0;
+        padding: 2px 10px;
+      }
+
+      .period-number {
+        min-width: 78px;
+        font-size: .95rem;
+      }
+
+      .main-timers {
+        gap: 5px;
+        margin: 5px 0;
+      }
+
       .timer-card {
         flex: 1 1 0;
         min-width: 0;
         padding: 4px 6px;
         border-radius: 9px;
       }
+
       .timer-label { font-size: .68rem; }
-      .clock { font-size: clamp(2rem, 8.5vh, 2.8rem); line-height: 1; }
+
+      .clock {
+        font-size: clamp(2rem, 8.5vh, 2.8rem);
+        line-height: 1;
+      }
+
       .timer-row { gap: 2px; }
-      .timer-row button { min-height: 27px; margin: 2px; padding: 3px 8px; font-size: .76rem; }
+
+      .timer-row button {
+        min-height: 27px;
+        margin: 2px;
+        padding: 3px 8px;
+        font-size: .76rem;
+      }
+
       .duration-setting { display: none; }
+
       .board {
         width: 100%;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         gap: 7px;
         padding: 5px 0;
       }
-      .team, .center-panel { min-height: 0; padding: 5px; border-radius: 9px; }
-      .team-name { min-height: 27px; padding: 3px 6px; font-size: .9rem; }
-      .score { margin: 1px 0 3px; font-size: clamp(3rem, 12vh, 4rem); line-height: .95; }
-      .score-buttons button { min-width: 44px; min-height: 28px; margin: 2px; padding: 3px 7px; font-size: .9rem; }
-      .team-controls { gap: 2px; margin-top: 0; }
-      .team-controls button { min-height: 25px; margin: 1px; padding: 2px 7px; font-size: .74rem; }
-      .stat-row { gap: 3px; margin-top: 4px; padding-top: 3px; }
+
+      .team,
+      .center-panel {
+        min-height: 0;
+        padding: 5px;
+        border-radius: 9px;
+      }
+
+      .team-name {
+        min-height: 27px;
+        padding: 3px 6px;
+        font-size: .9rem;
+      }
+
+      .score {
+        margin: 1px 0 3px;
+        font-size: clamp(3rem, 12vh, 4rem);
+        line-height: .95;
+      }
+
+      .score-buttons button {
+        min-width: 44px;
+        min-height: 28px;
+        margin: 2px;
+        padding: 3px 7px;
+        font-size: .9rem;
+      }
+
+      .team-controls {
+        gap: 2px;
+        margin-top: 0;
+      }
+
+      .team-controls button {
+        min-height: 25px;
+        margin: 1px;
+        padding: 2px 7px;
+        font-size: .74rem;
+      }
+
+      .stat-row {
+        gap: 3px;
+        margin-top: 4px;
+        padding-top: 3px;
+      }
+
       .stat-label { font-size: .7rem; }
-      .stat-value { min-width: 20px; font-size: 1.05rem; }
+
+      .stat-value {
+        min-width: 20px;
+        font-size: 1.05rem;
+      }
+
       .small-controls { gap: 1px; }
-      .small-controls button { min-width: 28px; min-height: 24px; margin: 1px; padding: 1px 5px; font-size: .7rem; }
-      .center-panel { grid-column: 1 / -1; grid-row: 2; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 7px; }
+
+      .small-controls button {
+        min-width: 28px;
+        min-height: 24px;
+        margin: 1px;
+        padding: 1px 5px;
+        font-size: .7rem;
+      }
+
+      .center-panel {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 7px;
+      }
+
       .center-panel h2 { font-size: .7rem; }
-      .possession { min-height: 42px; padding: 3px; font-size: .72rem; }
+
+      .possession {
+        min-height: 42px;
+        padding: 3px;
+        font-size: .72rem;
+      }
+
       .rule-setting { display: none; }
       .status { min-height: 0; font-size: .65rem; }
       .bottom-actions, .help { display: none; }
@@ -249,21 +487,91 @@
         gap: 3px;
         padding: 4px 7px;
       }
-      h1 { flex: 0 0 auto; margin: 0; font-size: 1rem; }
-      .toolbar { flex: 0 0 auto; margin: 0; gap: 3px; }
-      .toolbar button { min-height: 26px; margin: 0; padding: 3px 8px; font-size: .75rem; }
-      .period-bar { flex: 0 0 auto; margin: 0 auto; padding: 1px 7px; gap: 4px; }
-      .period-bar button { min-height: 24px; margin: 0; padding: 1px 9px; }
-      .period-number { min-width: 74px; font-size: .9rem; }
-      .main-timers { flex: 0 0 auto; gap: 5px; margin: 0; }
-      .timer-card { flex: 1 1 0; min-width: 0; padding: 3px 6px; border-radius: 8px; }
+
+      h1 {
+        flex: 0 0 auto;
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .toolbar {
+        flex: 0 0 auto;
+        margin: 0;
+        gap: 3px;
+      }
+
+      .toolbar button {
+        min-height: 26px;
+        margin: 0;
+        padding: 3px 8px;
+        font-size: .75rem;
+      }
+
+      .period-bar {
+        flex: 0 0 auto;
+        margin: 0 auto;
+        padding: 1px 7px;
+        gap: 4px;
+      }
+
+      .period-bar button {
+        min-height: 24px;
+        margin: 0;
+        padding: 1px 9px;
+      }
+
+      .period-number {
+        min-width: 74px;
+        font-size: .9rem;
+      }
+
+      .main-timers {
+        flex: 0 0 auto;
+        gap: 5px;
+        margin: 0;
+      }
+
+      .timer-card {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 3px 6px;
+        border-radius: 8px;
+      }
+
       .timer-label { font-size: .65rem; }
-      .clock { font-size: clamp(1.8rem, 7.5vh, 2.5rem); line-height: 1; }
+
+      .clock {
+        font-size: clamp(1.8rem, 7.5vh, 2.5rem);
+        line-height: 1;
+      }
+
       .timer-row { gap: 1px; }
-      .timer-row button { min-height: 24px; margin: 1px; padding: 2px 6px; font-size: .68rem; }
-      .duration-setting { display: block; margin-top: 2px; font-size: .68rem; }
-      .duration-setting input { width: 45px; padding: 2px; }
-      .duration-setting button { min-height: 22px; margin: 1px; padding: 1px 5px; font-size: .65rem; }
+
+      .timer-row button {
+        min-height: 24px;
+        margin: 1px;
+        padding: 2px 6px;
+        font-size: .68rem;
+      }
+
+      .duration-setting {
+        display: block;
+        margin-top: 2px;
+        font-size: .68rem;
+      }
+
+      .duration-setting input {
+        width: 45px;
+        padding: 2px;
+      }
+
+      .duration-setting button {
+        min-height: 22px;
+        margin: 1px;
+        padding: 1px 5px;
+        font-size: .65rem;
+      }
+
       .board {
         flex: 1 1 auto;
         min-height: 0;
@@ -272,25 +580,567 @@
         gap: 5px;
         padding: 0;
       }
-      .team, .center-panel { min-height: 0; padding: 4px; border-radius: 8px; }
-      .team-name { min-height: 25px; padding: 2px 5px; font-size: .85rem; }
-      .score { margin: 0 0 2px; font-size: clamp(2.8rem, 10vh, 3.7rem); line-height: .95; }
-      .score-buttons button { min-width: 40px; min-height: 26px; margin: 1px; padding: 2px 6px; font-size: .82rem; }
-      .team-controls { gap: 1px; margin-top: 0; }
-      .team-controls button { min-height: 23px; margin: 1px; padding: 1px 6px; font-size: .68rem; }
-      .stat-row { gap: 2px; margin-top: 3px; padding-top: 2px; }
+
+      .team,
+      .center-panel {
+        min-height: 0;
+        padding: 4px;
+        border-radius: 8px;
+      }
+
+      .team-name {
+        min-height: 25px;
+        padding: 2px 5px;
+        font-size: .85rem;
+      }
+
+      .score {
+        margin: 0 0 2px;
+        font-size: clamp(2.8rem, 10vh, 3.7rem);
+        line-height: .95;
+      }
+
+      .score-buttons button {
+        min-width: 40px;
+        min-height: 26px;
+        margin: 1px;
+        padding: 2px 6px;
+        font-size: .82rem;
+      }
+
+      .team-controls {
+        gap: 1px;
+        margin-top: 0;
+      }
+
+      .team-controls button {
+        min-height: 23px;
+        margin: 1px;
+        padding: 1px 6px;
+        font-size: .68rem;
+      }
+
+      .stat-row {
+        gap: 2px;
+        margin-top: 3px;
+        padding-top: 2px;
+      }
+
       .stat-label { font-size: .65rem; }
-      .stat-value { min-width: 18px; font-size: .95rem; }
+
+      .stat-value {
+        min-width: 18px;
+        font-size: .95rem;
+      }
+
       .small-controls { gap: 0; }
-      .small-controls button { min-width: 25px; min-height: 22px; margin: 1px; padding: 1px 4px; font-size: .65rem; }
-      .center-panel { grid-column: auto; grid-row: auto; flex-direction: column; justify-content: center; gap: 4px; }
+
+      .small-controls button {
+        min-width: 25px;
+        min-height: 22px;
+        margin: 1px;
+        padding: 1px 4px;
+        font-size: .65rem;
+      }
+
+      .center-panel {
+        grid-column: auto;
+        grid-row: auto;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+      }
+
       .center-panel h2 { font-size: .65rem; }
-      .possession { min-height: 36px; padding: 2px; font-size: .66rem; }
-      .rule-setting { display: grid; gap: 1px; font-size: .58rem; }
-      .rule-setting input { width: 45px; padding: 2px; }
+
+      .possession {
+        min-height: 36px;
+        padding: 2px;
+        font-size: .66rem;
+      }
+
+      .rule-setting {
+        display: grid;
+        gap: 1px;
+        font-size: .58rem;
+      }
+
+      .rule-setting input {
+        width: 45px;
+        padding: 2px;
+      }
+
       .status { min-height: 0; font-size: .58rem; }
-      .bottom-actions { flex: 0 0 auto; margin: 0; }
-      .bottom-actions button { min-height: 23px; margin: 1px; padding: 1px 6px; font-size: .65rem; }
+
+      .bottom-actions {
+        flex: 0 0 auto;
+        margin: 0;
+      }
+
+      .bottom-actions button {
+        min-height: 23px;
+        margin: 1px;
+        padding: 1px 6px;
+        font-size: .65rem;
+      }
+
+      .help { display: none; }
+    }
+
+    /* 部分手機瀏覽器回報的 CSS 寬度較大，仍以橫向短螢幕套用 */
+    @media (orientation: landscape) and (max-height: 600px) {
+      body {
+        height: 100svh;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 3px 6px;
+      }
+
+      h1 {
+        flex: 0 0 auto;
+        margin: 0;
+        font-size: clamp(.75rem, 3.2vh, 1rem);
+        line-height: 1.1;
+      }
+
+      .toolbar {
+        flex: 0 0 auto;
+        margin: 0;
+        gap: 2px;
+      }
+
+      .toolbar button {
+        min-height: 22px;
+        margin: 0;
+        padding: 2px 6px;
+        font-size: clamp(.58rem, 2.2vh, .72rem);
+      }
+
+      .period-bar {
+        flex: 0 0 auto;
+        margin: 0 auto;
+        padding: 0 5px;
+        gap: 3px;
+      }
+
+      .period-bar button {
+        min-height: 20px;
+        margin: 0;
+        padding: 0 7px;
+        font-size: .7rem;
+      }
+
+      .period-number {
+        min-width: 65px;
+        font-size: .75rem;
+      }
+
+      .main-timers {
+        flex: 0 0 auto;
+        gap: 4px;
+        margin: 0;
+      }
+
+      .timer-card {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 2px 4px;
+        border-radius: 6px;
+      }
+
+      .timer-label { font-size: .55rem; }
+
+      .clock {
+        font-size: clamp(1.35rem, 6vh, 2rem);
+        line-height: .95;
+      }
+
+      .timer-row { gap: 0; }
+
+      .timer-row button {
+        min-height: 20px;
+        margin: 1px;
+        padding: 1px 4px;
+        font-size: .58rem;
+      }
+
+      .duration-setting {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        margin-top: 1px;
+        font-size: .56rem;
+      }
+
+      .duration-setting input {
+        width: 34px;
+        padding: 1px;
+        font-size: .65rem;
+      }
+
+      .duration-setting button {
+        min-height: 18px;
+        margin: 0;
+        padding: 0 4px;
+        font-size: .55rem;
+      }
+
+      .board {
+        flex: 1 1 auto;
+        min-height: 0;
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) minmax(66px, .35fr) minmax(0, 1fr);
+        gap: 3px;
+        padding: 0;
+      }
+
+      .team,
+      .center-panel {
+        min-height: 0;
+        padding: 3px;
+        border-radius: 6px;
+      }
+
+      .team-name {
+        min-height: 21px;
+        padding: 1px 4px;
+        font-size: .72rem;
+      }
+
+      .score {
+        margin: 0;
+        font-size: clamp(2.1rem, 9vh, 3rem);
+        line-height: .9;
+      }
+
+      .score-buttons button {
+        min-width: 32px;
+        min-height: 21px;
+        margin: 1px;
+        padding: 1px 4px;
+        font-size: .68rem;
+      }
+
+      .team-controls { margin: 0; }
+
+      .team-controls button {
+        min-height: 19px;
+        margin: 0;
+        padding: 0 4px;
+        font-size: .56rem;
+      }
+
+      .stat-row {
+        gap: 1px;
+        margin-top: 1px;
+        padding-top: 1px;
+      }
+
+      .stat-label { font-size: .54rem; }
+
+      .stat-value {
+        min-width: 14px;
+        font-size: .75rem;
+      }
+
+      .small-controls button {
+        min-width: 20px;
+        min-height: 18px;
+        margin: 0;
+        padding: 0 3px;
+        font-size: .52rem;
+      }
+
+      .center-panel {
+        grid-column: auto;
+        grid-row: auto;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2px;
+      }
+
+      .center-panel h2 { font-size: .55rem; }
+
+      .possession {
+        min-height: 27px;
+        padding: 1px;
+        font-size: .55rem;
+      }
+
+      .rule-setting {
+        display: grid;
+        gap: 0;
+        font-size: .48rem;
+      }
+
+      .rule-setting input {
+        width: 34px;
+        padding: 1px;
+        font-size: .6rem;
+      }
+
+      .status { min-height: 0; font-size: .48rem; }
+
+      .bottom-actions {
+        flex: 0 0 auto;
+        margin: 0;
+      }
+
+      .bottom-actions button {
+        min-height: 18px;
+        margin: 0;
+        padding: 0 4px;
+        font-size: .52rem;
+      }
+
+      .help { display: none; }
+    }
+
+    /* 橫向專用三欄：比賽時間｜比分操作｜進攻時間 */
+    @media (orientation: landscape) and (max-width: 1400px) {
+      body {
+        height: 100svh;
+        min-height: 0;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: minmax(145px, 1fr) minmax(0, 2.35fr) minmax(145px, 1fr);
+        grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+        grid-template-areas:
+          "title title title"
+          "tools tools tools"
+          "period period period"
+          "game board shot"
+          "actions actions actions";
+        align-items: stretch;
+        gap: 4px 7px;
+        padding: 4px max(6px, env(safe-area-inset-left)) 4px max(6px, env(safe-area-inset-right));
+      }
+
+      h1 {
+        grid-area: title;
+        display: block;
+        margin: 0;
+        font-size: clamp(.85rem, 3vh, 1.15rem);
+        line-height: 1.1;
+      }
+
+      .toolbar {
+        grid-area: tools;
+        margin: 0;
+        gap: 3px;
+      }
+
+      .toolbar button {
+        min-height: 30px;
+        margin: 0;
+        padding: 3px 9px;
+        font-size: clamp(.65rem, 2.2vh, .8rem);
+      }
+
+      .period-bar {
+        grid-area: period;
+        margin: 0 auto;
+        padding: 1px 8px;
+      }
+
+      .period-bar button {
+        min-height: 25px;
+        margin: 0;
+        padding: 1px 9px;
+      }
+
+      .period-number {
+        min-width: 75px;
+        font-size: .82rem;
+      }
+
+      .main-timers { display: contents; }
+
+      .timer-card {
+        min-width: 0;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 6px 5px;
+        border-radius: 9px;
+      }
+
+      .timer-card:first-child { grid-area: game; }
+      .timer-card:last-child { grid-area: shot; }
+      .timer-label { font-size: clamp(.62rem, 2vh, .8rem); }
+
+      .clock {
+        font-size: clamp(1.35rem, 6.5vh, 2.25rem);
+        line-height: 1;
+        white-space: nowrap;
+        letter-spacing: -.06em;
+      }
+
+      #gameClock { font-size: clamp(1.25rem, 5.8vh, 2rem); }
+      .timer-row { gap: 2px; }
+
+      .timer-row button {
+        min-height: 34px;
+        margin: 2px 1px;
+        padding: 3px 6px;
+        font-size: clamp(.62rem, 2vh, .78rem);
+      }
+
+      .duration-setting {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        margin-top: 5px;
+        font-size: clamp(.58rem, 1.8vh, .72rem);
+      }
+
+      .duration-setting input {
+        width: 42px;
+        padding: 3px;
+      }
+
+      .duration-setting button {
+        min-height: 28px;
+        margin: 1px;
+        padding: 2px 6px;
+        font-size: .68rem;
+      }
+
+      .board {
+        grid-area: board;
+        min-height: 0;
+        width: 100%;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 4px;
+        padding: 0;
+      }
+
+      .team {
+        min-height: 0;
+        padding: 5px;
+        border-radius: 9px;
+      }
+
+      .team-name {
+        min-height: 28px;
+        padding: 2px 5px;
+        font-size: clamp(.8rem, 2.6vh, 1.05rem);
+      }
+
+      .score {
+        margin: 2px 0 4px;
+        font-size: clamp(3rem, 15vh, 6rem);
+        line-height: .95;
+      }
+
+      .score-buttons button {
+        min-width: 42px;
+        min-height: 34px;
+        margin: 2px;
+        padding: 3px 7px;
+        font-size: clamp(.8rem, 2.5vh, 1rem);
+      }
+
+      .team-controls { margin-top: 0; }
+
+      .team-controls button {
+        min-height: 30px;
+        margin: 2px;
+        padding: 2px 8px;
+        font-size: .75rem;
+      }
+
+      .stat-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2px 5px;
+        margin-top: 2px;
+        padding-top: 2px;
+        line-height: 1.05;
+      }
+
+      .stat-label { font-size: clamp(.65rem, 2vh, .8rem); }
+
+      .stat-value {
+        min-width: 20px;
+        font-size: 1.1rem;
+      }
+
+      .team .stat-row:first-of-type .small-controls {
+        grid-column: 1 / -1;
+        justify-content: center;
+      }
+
+      .team .stat-row:last-of-type {
+        margin-top: clamp(8px, 2.2vh, 16px);
+      }
+
+      .small-controls {
+        grid-column: 1 / -1;
+        justify-content: center;
+      }
+
+      .small-controls button {
+        min-width: 36px;
+        min-height: 31px;
+        margin: 1px;
+        padding: 2px 7px;
+        font-size: .82rem;
+      }
+
+      .center-panel {
+        grid-area: 2 / 1 / 3 / 3;
+        min-height: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 4px 8px;
+        padding: 3px;
+      }
+
+      .center-panel h2 { font-size: .68rem; }
+
+      .possession {
+        min-height: 30px;
+        padding: 2px 8px;
+        font-size: .72rem;
+      }
+
+      .rule-setting {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: .65rem;
+      }
+
+      .rule-setting input {
+        width: 40px;
+        padding: 2px;
+      }
+
+      .status { min-height: 0; font-size: .6rem; }
+
+      .bottom-actions {
+        grid-area: actions;
+        margin: 0;
+      }
+
+      .bottom-actions button {
+        min-height: 27px;
+        margin: 0 2px;
+        padding: 2px 7px;
+        font-size: .65rem;
+      }
+
       .help { display: none; }
     }
   </style>
@@ -318,8 +1168,13 @@
         <button id="gameToggle" type="button" onclick="toggleGameClock()">開始</button>
         <button class="secondary" type="button" onclick="resetGameClock()">重設本節</button>
       </div>
-      <div class="duration-setting">每節分鐘數 <input id="periodMinutes" type="number" min="1" max="60" value="10" aria-label="每節分鐘數"><button class="secondary" type="button" onclick="applyPeriodMinutes()">套用</button></div>
+      <div class="duration-setting">
+        每節分鐘數
+        <input id="periodMinutes" type="number" min="1" max="60" value="10" aria-label="每節分鐘數">
+        <button class="secondary" type="button" onclick="applyPeriodMinutes()">套用</button>
+      </div>
     </div>
+
     <div class="timer-card">
       <div class="timer-label">進攻時間</div>
       <div class="clock" id="shotClock">24</div>
@@ -328,7 +1183,11 @@
         <button class="secondary" type="button" onclick="resetShotClock(24)">重設 24 秒</button>
         <button class="secondary" type="button" onclick="resetShotClock(14)">重設 14 秒</button>
       </div>
-      <div class="duration-setting">重設秒數 <input id="shotSeconds" type="number" min="1" max="60" value="24" aria-label="自訂進攻時間"><button class="secondary" type="button" onclick="applyShotSeconds()">自訂</button></div>
+      <div class="duration-setting">
+        重設秒數
+        <input id="shotSeconds" type="number" min="1" max="60" value="24" aria-label="自訂進攻時間">
+        <button class="secondary" type="button" onclick="applyShotSeconds()">自訂</button>
+      </div>
     </div>
   </section>
 
@@ -341,21 +1200,34 @@
         <button type="button" title="主隊加 2 分（快捷鍵 2）" onclick="addScore('A',2)">+2</button>
         <button type="button" title="主隊加 3 分（快捷鍵 3）" onclick="addScore('A',3)">+3</button>
       </div>
-      <div class="team-controls"><button class="secondary" type="button" onclick="addScore('A',-1)">−1 分</button></div>
-      <div class="stat-row">
-        <span class="stat-label">團隊犯規</span><span class="stat-value" id="foulsA">0</span>
-        <span class="small-controls"><button class="purple" type="button" onclick="changeStat('fouls','A',1)" aria-label="主隊犯規加一">＋</button><button class="secondary" type="button" onclick="changeStat('fouls','A',-1)" aria-label="主隊犯規減一">−</button></span>
+      <div class="team-controls">
+        <button class="secondary" type="button" onclick="addScore('A',-1)">−1 分</button>
       </div>
+
       <div class="stat-row">
-        <span class="stat-label">暫停</span><span class="stat-value" id="timeoutsA">2</span>
-        <span class="small-controls"><button type="button" onclick="changeStat('timeouts','A',-1)" aria-label="主隊使用一次暫停">使用</button><button class="secondary" type="button" onclick="changeStat('timeouts','A',1)" aria-label="主隊增加一次暫停">＋</button></span>
+        <span class="stat-label">團隊犯規</span>
+        <span class="stat-value" id="foulsA">0</span>
+        <span class="small-controls">
+          <button class="purple" type="button" onclick="changeStat('fouls','A',1)" aria-label="主隊犯規加一">＋</button>
+          <button class="secondary" type="button" onclick="changeStat('fouls','A',-1)" aria-label="主隊犯規減一">−</button>
+        </span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">暫停</span>
+        <span class="stat-value" id="timeoutsA">2</span>
+        <span class="small-controls">
+          <button type="button" onclick="changeStat('timeouts','A',-1)" aria-label="主隊使用一次暫停">使用</button>
+          <button class="secondary" type="button" onclick="changeStat('timeouts','A',1)" aria-label="主隊增加一次暫停">＋</button>
+        </span>
       </div>
     </section>
 
     <section class="center-panel" aria-label="球權與規則設定">
       <h2>目前球權</h2>
       <button class="possession" id="possessionBtn" type="button" onclick="switchPossession()">主隊持球　⇄</button>
-      <label class="rule-setting">每隊初始暫停數
+      <label class="rule-setting">
+        每隊初始暫停數
         <input id="timeoutsPerTeam" type="number" min="0" max="20" value="2" onchange="applyTimeoutRule()">
       </label>
       <div class="status" id="status" aria-live="polite"></div>
@@ -369,14 +1241,26 @@
         <button type="button" title="客隊加 2 分（快捷鍵 W）" onclick="addScore('B',2)">+2</button>
         <button type="button" title="客隊加 3 分（快捷鍵 E）" onclick="addScore('B',3)">+3</button>
       </div>
-      <div class="team-controls"><button class="secondary" type="button" onclick="addScore('B',-1)">−1 分</button></div>
-      <div class="stat-row">
-        <span class="stat-label">團隊犯規</span><span class="stat-value" id="foulsB">0</span>
-        <span class="small-controls"><button class="purple" type="button" onclick="changeStat('fouls','B',1)" aria-label="客隊犯規加一">＋</button><button class="secondary" type="button" onclick="changeStat('fouls','B',-1)" aria-label="客隊犯規減一">−</button></span>
+      <div class="team-controls">
+        <button class="secondary" type="button" onclick="addScore('B',-1)">−1 分</button>
       </div>
+
       <div class="stat-row">
-        <span class="stat-label">暫停</span><span class="stat-value" id="timeoutsB">2</span>
-        <span class="small-controls"><button type="button" onclick="changeStat('timeouts','B',-1)" aria-label="客隊使用一次暫停">使用</button><button class="secondary" type="button" onclick="changeStat('timeouts','B',1)" aria-label="客隊增加一次暫停">＋</button></span>
+        <span class="stat-label">團隊犯規</span>
+        <span class="stat-value" id="foulsB">0</span>
+        <span class="small-controls">
+          <button class="purple" type="button" onclick="changeStat('fouls','B',1)" aria-label="客隊犯規加一">＋</button>
+          <button class="secondary" type="button" onclick="changeStat('fouls','B',-1)" aria-label="客隊犯規減一">−</button>
+        </span>
+      </div>
+
+      <div class="stat-row">
+        <span class="stat-label">暫停</span>
+        <span class="stat-value" id="timeoutsB">2</span>
+        <span class="small-controls">
+          <button type="button" onclick="changeStat('timeouts','B',-1)" aria-label="客隊使用一次暫停">使用</button>
+          <button class="secondary" type="button" onclick="changeStat('timeouts','B',1)" aria-label="客隊增加一次暫停">＋</button>
+        </span>
       </div>
     </section>
   </main>
@@ -385,17 +1269,33 @@
     <button class="secondary" type="button" onclick="resetTeamFouls()">本節犯規歸零</button>
     <button class="secondary" type="button" onclick="resetShotClock(24)">進攻時間重設 24 秒</button>
   </div>
-  <p class="help">快捷鍵：主隊得分 1／2／3；客隊得分 Q／W／E；空白鍵開始或暫停比賽時間；按鍵時若正在輸入隊名或數字，快捷鍵會停用。資料會自動保存在這台裝置的瀏覽器。</p>
+
+  <p class="help">
+    快捷鍵：主隊得分 1／2／3；客隊得分 Q／W／E；空白鍵開始或暫停比賽時間。
+    按鍵時若正在輸入隊名或數字，快捷鍵會停用。資料會自動保存在這台裝置的瀏覽器。
+  </p>
 
   <script>
     const STORAGE_KEY = 'basketball-scoreboard-v2';
+
     const DEFAULTS = {
-      scores: { A: 0, B: 0 }, fouls: { A: 0, B: 0 }, timeouts: { A: 2, B: 2 },
-      possession: 'A', period: 1, periodMinutes: 10, timeoutsPerTeam: 2,
-      gameRemaining: 600000, gameRunning: false, gameEndAt: 0,
-      shotRemaining: 24000, shotRunning: false, shotEndAt: 0,
-      nameA: '主隊', nameB: '客隊'
+      scores: { A: 0, B: 0 },
+      fouls: { A: 0, B: 0 },
+      timeouts: { A: 2, B: 2 },
+      possession: 'A',
+      period: 1,
+      periodMinutes: 10,
+      timeoutsPerTeam: 2,
+      gameRemaining: 600000,
+      gameRunning: false,
+      gameEndAt: 0,
+      shotRemaining: 24000,
+      shotRunning: false,
+      shotEndAt: 0,
+      nameA: '主隊',
+      nameB: '客隊'
     };
+
     let state = loadState();
     let history = [];
     let intervalId = null;
@@ -404,16 +1304,27 @@
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
         if (!saved) return structuredClone(DEFAULTS);
+
         const restored = { ...structuredClone(DEFAULTS), ...saved };
         restored.scores = { ...DEFAULTS.scores, ...saved.scores };
         restored.fouls = { ...DEFAULTS.fouls, ...saved.fouls };
         restored.timeouts = { ...DEFAULTS.timeouts, ...saved.timeouts };
-        if (restored.gameRunning) restored.gameRemaining = Math.max(0, restored.gameEndAt - Date.now());
-        if (restored.shotRunning) restored.shotRemaining = Math.max(0, restored.shotEndAt - Date.now());
+
+        if (restored.gameRunning) {
+          restored.gameRemaining = Math.max(0, restored.gameEndAt - Date.now());
+        }
+
+        if (restored.shotRunning) {
+          restored.shotRemaining = Math.max(0, restored.shotEndAt - Date.now());
+        }
+
         if (restored.gameRemaining <= 0) restored.gameRunning = false;
         if (restored.shotRemaining <= 0) restored.shotRunning = false;
+
         return restored;
-      } catch { return structuredClone(DEFAULTS); }
+      } catch {
+        return structuredClone(DEFAULTS);
+      }
     }
 
     function saveState() {
@@ -437,17 +1348,22 @@
     function undo() {
       const previous = history.pop();
       if (!previous) return announce('目前沒有可復原的操作');
+
       state = JSON.parse(previous);
       saveState();
       announce('已復原上一步');
     }
 
     function addScore(team, points) {
-      update(() => { state.scores[team] = Math.max(0, state.scores[team] + points); });
+      update(() => {
+        state.scores[team] = Math.max(0, state.scores[team] + points);
+      });
     }
 
     function changeStat(kind, team, amount) {
-      update(() => { state[kind][team] = Math.max(0, state[kind][team] + amount); });
+      update(() => {
+        state[kind][team] = Math.max(0, state[kind][team] + amount);
+      });
     }
 
     function changePeriod(amount) {
@@ -464,33 +1380,62 @@
     }
 
     function switchPossession() {
-      update(() => { state.possession = state.possession === 'A' ? 'B' : 'A'; });
+      update(() => {
+        state.possession = state.possession === 'A' ? 'B' : 'A';
+      });
     }
 
     function applyPeriodMinutes() {
       const input = document.getElementById('periodMinutes');
       const minutes = Number.parseInt(input.value, 10);
-      if (!Number.isInteger(minutes) || minutes < 1 || minutes > 60) return announce('每節時間請輸入 1 到 60 分鐘');
-      update(() => { state.periodMinutes = minutes; state.gameRemaining = minutes * 60000; state.gameRunning = false; state.gameEndAt = 0; });
+
+      if (!Number.isInteger(minutes) || minutes < 1 || minutes > 60) {
+        return announce('每節時間請輸入 1 到 60 分鐘');
+      }
+
+      update(() => {
+        state.periodMinutes = minutes;
+        state.gameRemaining = minutes * 60000;
+        state.gameRunning = false;
+        state.gameEndAt = 0;
+      });
+
       announce('每節時間已套用');
     }
 
     function applyShotSeconds() {
       const seconds = Number.parseInt(document.getElementById('shotSeconds').value, 10);
-      if (!Number.isInteger(seconds) || seconds < 1 || seconds > 60) return announce('進攻時間請輸入 1 到 60 秒');
+
+      if (!Number.isInteger(seconds) || seconds < 1 || seconds > 60) {
+        return announce('進攻時間請輸入 1 到 60 秒');
+      }
+
       resetShotClock(seconds);
     }
 
     function applyTimeoutRule() {
       const input = document.getElementById('timeoutsPerTeam');
       const count = Number.parseInt(input.value, 10);
-      if (!Number.isInteger(count) || count < 0 || count > 20) { input.value = state.timeoutsPerTeam; return announce('初始暫停數請輸入 0 到 20'); }
-      update(() => { state.timeoutsPerTeam = count; state.timeouts = { A: count, B: count }; });
+
+      if (!Number.isInteger(count) || count < 0 || count > 20) {
+        input.value = state.timeoutsPerTeam;
+        return announce('初始暫停數請輸入 0 到 20');
+      }
+
+      update(() => {
+        state.timeoutsPerTeam = count;
+        state.timeouts = { A: count, B: count };
+      });
+
       announce('兩隊暫停數已更新');
     }
 
     function resetGameClock() {
-      update(() => { state.gameRunning = false; state.gameEndAt = 0; state.gameRemaining = state.periodMinutes * 60000; });
+      update(() => {
+        state.gameRunning = false;
+        state.gameEndAt = 0;
+        state.gameRemaining = state.periodMinutes * 60000;
+      });
     }
 
     function toggleGameClock() {
@@ -503,11 +1448,16 @@
           state.gameEndAt = Date.now() + state.gameRemaining;
         }
       });
+
       ensureTicker();
     }
 
     function resetShotClock(seconds) {
-      update(() => { state.shotRunning = false; state.shotEndAt = 0; state.shotRemaining = seconds * 1000; });
+      update(() => {
+        state.shotRunning = false;
+        state.shotEndAt = 0;
+        state.shotRemaining = seconds * 1000;
+      });
     }
 
     function toggleShotClock() {
@@ -520,29 +1470,50 @@
           state.shotEndAt = Date.now() + state.shotRemaining;
         }
       });
+
       ensureTicker();
     }
 
     function resetTeamFouls() {
-      update(() => { state.fouls = { A: 0, B: 0 }; });
+      update(() => {
+        state.fouls = { A: 0, B: 0 };
+      });
+
       announce('兩隊本節犯規已歸零');
     }
 
     function resetGame() {
       if (!confirm('確定重新開始比賽？比分、犯規、暫停與計時都會重設。')) return;
+
       snapshot();
-      const names = { nameA: state.nameA, nameB: state.nameB };
-      state = { ...structuredClone(DEFAULTS), ...names, periodMinutes: state.periodMinutes,
+
+      const names = {
+        nameA: state.nameA,
+        nameB: state.nameB
+      };
+
+      state = {
+        ...structuredClone(DEFAULTS),
+        ...names,
+        periodMinutes: state.periodMinutes,
         gameRemaining: state.periodMinutes * 60000,
         timeoutsPerTeam: state.timeoutsPerTeam,
-        timeouts: { A: state.timeoutsPerTeam, B: state.timeoutsPerTeam } };
+        timeouts: {
+          A: state.timeoutsPerTeam,
+          B: state.timeoutsPerTeam
+        }
+      };
+
       saveState();
       announce('比賽已重新開始');
     }
 
     function formatClock(milliseconds) {
       const seconds = Math.ceil(Math.max(0, milliseconds) / 1000);
-      return `${String(Math.floor(seconds / 60)).padStart(2, '0')}:${String(seconds % 60).padStart(2, '0')}`;
+      const minutes = Math.floor(seconds / 60);
+      const remainder = seconds % 60;
+
+      return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`;
     }
 
     function render() {
@@ -552,21 +1523,31 @@
       document.getElementById('foulsB').textContent = state.fouls.B;
       document.getElementById('timeoutsA').textContent = state.timeouts.A;
       document.getElementById('timeoutsB').textContent = state.timeouts.B;
+
       document.getElementById('foulsA').classList.toggle('warn', state.fouls.A >= 5);
       document.getElementById('foulsB').classList.toggle('warn', state.fouls.B >= 5);
       document.getElementById('periodLabel').textContent = `第 ${state.period} 節`;
+
       document.getElementById('periodMinutes').value = state.periodMinutes;
       document.getElementById('timeoutsPerTeam').value = state.timeoutsPerTeam;
       document.getElementById('nameA').value = state.nameA;
       document.getElementById('nameB').value = state.nameB;
+
       document.getElementById('gameClock').textContent = formatClock(state.gameRemaining);
       document.getElementById('gameClock').classList.toggle('expired', state.gameRemaining <= 0);
-      document.getElementById('gameToggle').textContent = state.gameRunning ? '暫停' : (state.gameRemaining <= 0 ? '時間到' : '開始');
+      document.getElementById('gameToggle').textContent = state.gameRunning
+        ? '暫停'
+        : (state.gameRemaining <= 0 ? '時間到' : '開始');
       document.getElementById('gameToggle').disabled = state.gameRemaining <= 0 && !state.gameRunning;
-      document.getElementById('shotClock').textContent = String(Math.ceil(Math.max(0, state.shotRemaining) / 1000));
+
+      document.getElementById('shotClock').textContent =
+        String(Math.ceil(Math.max(0, state.shotRemaining) / 1000));
       document.getElementById('shotClock').classList.toggle('expired', state.shotRemaining <= 0);
-      document.getElementById('shotToggle').textContent = state.shotRunning ? '暫停' : (state.shotRemaining <= 0 ? '時間到' : '開始');
+      document.getElementById('shotToggle').textContent = state.shotRunning
+        ? '暫停'
+        : (state.shotRemaining <= 0 ? '時間到' : '開始');
       document.getElementById('shotToggle').disabled = state.shotRemaining <= 0 && !state.shotRunning;
+
       const name = state.possession === 'A' ? state.nameA : state.nameB;
       document.getElementById('possessionBtn').textContent = `${name}持球　⇄`;
       document.getElementById('undoBtn').disabled = history.length === 0;
@@ -574,44 +1555,97 @@
 
     function ensureTicker() {
       if (intervalId !== null) return;
+
       intervalId = setInterval(() => {
         let changed = false;
+
         if (state.gameRunning) {
           state.gameRemaining = Math.max(0, state.gameEndAt - Date.now());
-          if (state.gameRemaining <= 0) { state.gameRunning = false; state.gameEndAt = 0; announce('本節時間到'); }
+
+          if (state.gameRemaining <= 0) {
+            state.gameRunning = false;
+            state.gameEndAt = 0;
+            announce('本節時間到');
+          }
+
           changed = true;
         }
+
         if (state.shotRunning) {
           state.shotRemaining = Math.max(0, state.shotEndAt - Date.now());
-          if (state.shotRemaining <= 0) { state.shotRunning = false; state.shotEndAt = 0; announce('進攻時間到'); }
+
+          if (state.shotRemaining <= 0) {
+            state.shotRunning = false;
+            state.shotEndAt = 0;
+            announce('進攻時間到');
+          }
+
           changed = true;
         }
-        if (changed) { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); render(); }
-        if (!state.gameRunning && !state.shotRunning) { clearInterval(intervalId); intervalId = null; }
+
+        if (changed) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          render();
+        }
+
+        if (!state.gameRunning && !state.shotRunning) {
+          clearInterval(intervalId);
+          intervalId = null;
+        }
       }, 100);
     }
 
     function toggleFullscreen() {
-      if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
-      else document.exitFullscreen?.();
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen?.();
+      } else {
+        document.exitFullscreen?.();
+      }
     }
 
     function announce(message) {
       const status = document.getElementById('status');
       status.textContent = message;
+
       clearTimeout(announce.timeout);
-      announce.timeout = setTimeout(() => { status.textContent = ''; }, 2200);
+      announce.timeout = setTimeout(() => {
+        status.textContent = '';
+      }, 2200);
     }
 
     document.addEventListener('keydown', event => {
       const tag = event.target.tagName;
-      if (tag === 'INPUT' || tag === 'TEXTAREA' || event.ctrlKey || event.altKey || event.metaKey) return;
+
+      if (
+        tag === 'INPUT' ||
+        tag === 'TEXTAREA' ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.metaKey
+      ) {
+        return;
+      }
+
       const key = event.key.toLowerCase();
-      const shortcuts = { '1': () => addScore('A', 1), '2': () => addScore('A', 2), '3': () => addScore('A', 3),
-        q: () => addScore('B', 1), w: () => addScore('B', 2), e: () => addScore('B', 3) };
-      if (shortcuts[key]) { event.preventDefault(); shortcuts[key](); }
-      else if (event.code === 'Space') { event.preventDefault(); toggleGameClock(); }
-      else if (key === 'z') { undo(); }
+
+      const shortcuts = {
+        '1': () => addScore('A', 1),
+        '2': () => addScore('A', 2),
+        '3': () => addScore('A', 3),
+        q: () => addScore('B', 1),
+        w: () => addScore('B', 2),
+        e: () => addScore('B', 3)
+      };
+
+      if (shortcuts[key]) {
+        event.preventDefault();
+        shortcuts[key]();
+      } else if (event.code === 'Space') {
+        event.preventDefault();
+        toggleGameClock();
+      } else if (key === 'z') {
+        undo();
+      }
     });
 
     render();
