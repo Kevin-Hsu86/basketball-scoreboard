@@ -22,6 +22,10 @@
       --purple: #8650b3;
       --gray: #505b6d;
       --space: clamp(4px, 1vw, 12px);
+
+      /* 團隊犯規／暫停兩列共用的欄寬，數字才會上下對齊 */
+      --stat-label-w: 4.4rem;
+      --stat-ctrl-w: 5.9rem;
     }
 
     * { box-sizing: border-box; }
@@ -77,7 +81,7 @@
 
     h1 { margin: 0 0 6px; font-size: clamp(1.25rem, 2.5vw, 1.9rem); }
 
-    .toolbar, .period-bar, .timer-row, .team-controls, .small-controls {
+    .toolbar, .period-bar, .timer-row, .team-controls {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -116,6 +120,7 @@
 
     .timer-card { flex: 1 1 0; padding: 9px 10px; }
     .timer-label { color: var(--muted); font-size: .88rem; font-weight: 800; letter-spacing: .04em; }
+    .timer-hint { margin-top: 2px; color: var(--muted); font-size: .72rem; }
 
     .clock {
       color: var(--green);
@@ -182,22 +187,42 @@
     .score-buttons button { min-width: 58px; min-height: 48px; font-size: 1.15rem; }
     .team-controls { margin-top: 0; }
 
+    /* 三欄固定寬度：左＝名稱、中＝數字、右＝按鈕。
+       兩列欄寬完全相同，所以數字一定上下對齊。 */
     .stat-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: var(--stat-label-w) minmax(0, 1fr) var(--stat-ctrl-w);
       align-items: center;
-      justify-content: space-between;
-      gap: 6px;
+      gap: 4px;
       margin-top: 8px;
       padding-top: 6px;
       border-top: 1px solid var(--line);
-      text-align: left;
     }
 
-    .stat-label { color: var(--muted); font-weight: 800; }
-    .stat-value { min-width: 26px; text-align: center; font-size: 1.4rem; font-weight: 900; }
+    .stat-label {
+      color: var(--muted);
+      font-weight: 800;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .stat-value {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
     .stat-value.warn { color: var(--red); }
-    .small-controls { gap: 2px; }
-    .small-controls button { min-width: 38px; min-height: 36px; padding: 4px 8px; }
+
+    .small-controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+
+    .small-controls button { min-width: 38px; min-height: 36px; margin: 0; padding: 4px 8px; }
 
     .center-panel {
       display: flex;
@@ -268,6 +293,11 @@
 
     /* 窄版與手機直向：完整功能，內容可往下捲動 */
     @media (max-width: 760px) {
+      :root {
+        --stat-label-w: 3.5rem;
+        --stat-ctrl-w: 4.9rem;
+      }
+
       body { padding: 8px; }
       h1 { margin-bottom: 6px; }
       .toolbar { margin-bottom: 6px; }
@@ -280,6 +310,11 @@
       .team { padding: 8px 6px; }
       .team-name { min-height: 38px; font-size: 1rem; }
       .score { font-size: clamp(3.4rem, 17vw, 5rem); }
+      .stat-row { gap: 2px; }
+      .stat-label { font-size: .78rem; }
+      .stat-value { font-size: 1.2rem; }
+      .small-controls { gap: 2px; }
+      .small-controls button { min-width: 34px; padding: 4px 6px; font-size: .82rem; }
       .center-panel { grid-column: 1 / -1; grid-row: 2; padding: 10px; }
       .center-panel h2 { font-size: .92rem; }
       .possession-block { max-width: 320px; }
@@ -288,6 +323,11 @@
 
     /* 手機橫向：左右隊伍、中間球權設定；兩組計時器在頂排 */
     @media (orientation: landscape) and (max-width: 900px) {
+      :root {
+        --stat-label-w: 2.9rem;
+        --stat-ctrl-w: 4.3rem;
+      }
+
       body {
         width: 100%;
         min-height: 100svh;
@@ -314,6 +354,7 @@
       .timer-card:last-child { grid-area: shot; }
       .timer-card { padding: 5px 3px; border-radius: 9px; }
       .timer-label { font-size: .72rem; }
+      .timer-hint { display: none; }
       .clock { font-size: clamp(1.55rem, 7.5vh, 2.5rem); }
       .timer-row { gap: 1px; }
       .timer-row button { min-height: 34px; margin: 1px; padding: 3px 5px; font-size: .7rem; }
@@ -332,7 +373,7 @@
       .timeout-row { display: none; }
       .stat-row { gap: 2px; margin-top: 3px; padding-top: 2px; }
       .stat-label { font-size: .65rem; }
-      .stat-value { min-width: 17px; font-size: .95rem; }
+      .stat-value { font-size: .95rem; }
       .small-controls { gap: 1px; }
       .small-controls button { min-width: 29px; min-height: 29px; margin: 1px; padding: 2px 4px; font-size: .72rem; }
       .center-panel { gap: 4px; padding: 4px 2px; border-radius: 9px; }
@@ -362,6 +403,7 @@
 
   <div class="toolbar" aria-label="工具列">
     <button class="secondary" id="undoBtn" type="button" onclick="undo()">↶ 復原上一步</button>
+    <button class="secondary" id="soundBtn" type="button" onclick="toggleSound()">🔊 提示音：開</button>
     <button class="secondary" type="button" onclick="toggleFullscreen()">⛶ 全螢幕</button>
     <button class="danger" type="button" onclick="resetGame()">重新開始比賽</button>
   </div>
@@ -390,8 +432,8 @@
     <div class="timer-card">
       <div class="timer-label">進攻時間</div>
       <div class="clock" id="shotClock">24</div>
+      <div class="timer-hint">隨比賽時間一起開始、暫停</div>
       <div class="timer-row">
-        <button id="shotToggle" type="button" onclick="toggleShotClock()">開始</button>
         <button class="secondary" type="button" onclick="resetShotClock(24)">重設 24 秒</button>
         <button class="secondary" type="button" onclick="resetShotClock(14)">重設 14 秒</button>
       </div>
@@ -427,7 +469,7 @@
         <span class="stat-label">暫停</span>
         <span class="stat-value" id="timeoutsA">2</span>
         <span class="small-controls">
-          <button type="button" onclick="changeStat('timeouts','A',-1)" aria-label="主隊使用一次暫停">使用</button>
+          <button type="button" onclick="useTimeout('A')" aria-label="主隊使用一次暫停">使用</button>
           <button class="secondary" type="button" onclick="changeStat('timeouts','A',1)" aria-label="主隊增加一次暫停">＋</button>
         </span>
       </div>
@@ -469,7 +511,7 @@
         <span class="stat-label">暫停</span>
         <span class="stat-value" id="timeoutsB">2</span>
         <span class="small-controls">
-          <button type="button" onclick="changeStat('timeouts','B',-1)" aria-label="客隊使用一次暫停">使用</button>
+          <button type="button" onclick="useTimeout('B')" aria-label="客隊使用一次暫停">使用</button>
           <button class="secondary" type="button" onclick="changeStat('timeouts','B',1)" aria-label="客隊增加一次暫停">＋</button>
         </span>
       </div>
@@ -482,12 +524,14 @@
   </div>
 
   <p class="help">
-    快捷鍵：主隊得分 1／2／3；客隊得分 Q／W／E；空白鍵開始或暫停比賽時間。
-    按鍵時若正在輸入隊名或數字，快捷鍵會停用。資料會自動保存在這台裝置的瀏覽器。
+    快捷鍵：主隊得分 1／2／3；客隊得分 Q／W／E；空白鍵開始或暫停（比賽時間與進攻時間一起）；Z 復原上一步。
+    按鍵時若正在輸入隊名或數字，快捷鍵會停用。使用暫停會同時暫停計時。
+    資料會自動保存在這台裝置的瀏覽器。第一次點擊畫面後才能發出提示音。
   </p>
 
   <script>
     const STORAGE_KEY = 'basketball-scoreboard-v2';
+    const DEFAULT_SHOT_SECONDS = 24;
 
     const DEFAULTS = {
       scores: { A: 0, B: 0 },
@@ -500,70 +544,155 @@
       gameRemaining: 600000,
       gameRunning: false,
       gameEndAt: 0,
-      shotRemaining: 24000,
+      shotRemaining: DEFAULT_SHOT_SECONDS * 1000,
       shotRunning: false,
       shotEndAt: 0,
+      soundOn: true,
       nameA: '主隊',
       nameB: '客隊'
     };
 
+    // 這些欄位屬於「時間」，一般的復原不會動到它們
+    const CLOCK_KEYS = [
+      'gameRemaining', 'gameRunning', 'gameEndAt',
+      'shotRemaining', 'shotRunning', 'shotEndAt'
+    ];
+
+    function clone(value) {
+      return JSON.parse(JSON.stringify(value));
+    }
+
     let state = loadState();
     let history = [];
     let intervalId = null;
+    let storageWarned = false;
+    let audioCtx = null;
+
+    /* ========== 保存與讀取（localStorage 可能被瀏覽器禁用，所以都包 try / catch） ========== */
 
     function loadState() {
       try {
         const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-        if (!saved) return structuredClone(DEFAULTS);
+        if (!saved) return clone(DEFAULTS);
 
-        const restored = { ...structuredClone(DEFAULTS), ...saved };
+        const restored = { ...clone(DEFAULTS), ...saved };
         restored.scores = { ...DEFAULTS.scores, ...saved.scores };
         restored.fouls = { ...DEFAULTS.fouls, ...saved.fouls };
         restored.timeouts = { ...DEFAULTS.timeouts, ...saved.timeouts };
 
+        const now = Date.now();
+
         if (restored.gameRunning) {
-          restored.gameRemaining = Math.max(0, restored.gameEndAt - Date.now());
-        }
+          // 兩個計時器是一起走的：以「最早結束」的時間點為準，
+          // 如果關掉網頁期間已經有人歸零，兩個計時器都停在那一刻。
+          const stopAt = Math.min(
+            now,
+            restored.gameEndAt,
+            restored.shotRunning ? restored.shotEndAt : Infinity
+          );
 
-        if (restored.shotRunning) {
-          restored.shotRemaining = Math.max(0, restored.shotEndAt - Date.now());
-        }
+          restored.gameRemaining = Math.max(0, restored.gameEndAt - stopAt);
+          if (restored.shotRunning) {
+            restored.shotRemaining = Math.max(0, restored.shotEndAt - stopAt);
+          }
 
-        if (restored.gameRemaining <= 0) restored.gameRunning = false;
-        if (restored.shotRemaining <= 0) restored.shotRunning = false;
+          const expired =
+            restored.gameRemaining <= 0 ||
+            (restored.shotRunning && restored.shotRemaining <= 0);
+
+          if (expired) {
+            restored.gameRunning = false;
+            restored.gameEndAt = 0;
+            restored.shotRunning = false;
+            restored.shotEndAt = 0;
+          }
+        } else {
+          // 比賽時間沒在跑，進攻時間也不該在跑（舊版資料可能不是這樣）
+          restored.shotRunning = false;
+          restored.shotEndAt = 0;
+        }
 
         return restored;
-      } catch {
-        return structuredClone(DEFAULTS);
+      } catch (error) {
+        return clone(DEFAULTS);
+      }
+    }
+
+    function persist() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (error) {
+        if (!storageWarned) {
+          storageWarned = true;
+          announce('此瀏覽器不允許保存資料，重新整理後比分會消失');
+        }
       }
     }
 
     function saveState() {
       state.nameA = document.getElementById('nameA').value.trim() || '主隊';
       state.nameB = document.getElementById('nameB').value.trim() || '客隊';
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      persist();
       render();
     }
 
-    function snapshot() {
-      history.push(JSON.stringify(state));
+    /* ========== 復原 ========== */
+
+    // restoreClock 為 true 時（換節、重新開始），復原也會把時間還原（停止狀態）
+    function snapshot(restoreClock = false) {
+      const copy = clone(state);
+
+      if (restoreClock) {
+        const now = Date.now();
+        if (copy.gameRunning) copy.gameRemaining = Math.max(0, copy.gameEndAt - now);
+        if (copy.shotRunning) copy.shotRemaining = Math.max(0, copy.shotEndAt - now);
+        copy.gameRunning = false;
+        copy.gameEndAt = 0;
+        copy.shotRunning = false;
+        copy.shotEndAt = 0;
+      }
+
+      history.push({ state: copy, restoreClock });
       if (history.length > 50) history.shift();
     }
 
-    function update(action) {
-      snapshot();
+    // 會記錄進復原清單的操作（比分、犯規、暫停、球權、換節…）
+    function update(action, restoreClock = false) {
+      snapshot(restoreClock);
+      action();
+      saveState();
+    }
+
+    // 不記錄進復原清單的操作（計時器相關）
+    function apply(action) {
       action();
       saveState();
     }
 
     function undo() {
-      const previous = history.pop();
-      if (!previous) return announce('目前沒有可復原的操作');
+      const entry = history.pop();
+      if (!entry) return announce('目前沒有可復原的操作');
 
-      state = JSON.parse(previous);
+      const previous = entry.state;
+
+      // 隊名、提示音設定、每節分鐘數不跟著復原
+      ['nameA', 'nameB', 'soundOn', 'periodMinutes'].forEach(key => {
+        previous[key] = state[key];
+      });
+
+      // 一般操作：時間維持現在的狀態，不會「倒帶」
+      if (!entry.restoreClock) {
+        CLOCK_KEYS.forEach(key => {
+          previous[key] = state[key];
+        });
+      }
+
+      state = previous;
       saveState();
       announce('已復原上一步');
     }
+
+    /* ========== 比分、犯規、暫停、球權 ========== */
 
     function addScore(team, points) {
       update(() => {
@@ -577,16 +706,14 @@
       });
     }
 
-    function changePeriod(amount) {
+    function useTimeout(team) {
+      if (state.timeouts[team] <= 0) {
+        return announce('這一隊的暫停已經用完');
+      }
+
       update(() => {
-        state.period = Math.max(1, state.period + amount);
-        state.fouls = { A: 0, B: 0 };
-        state.gameRunning = false;
-        state.gameEndAt = 0;
-        state.gameRemaining = state.periodMinutes * 60000;
-        state.shotRunning = false;
-        state.shotEndAt = 0;
-        state.shotRemaining = 24000;
+        pauseClocks(Date.now());   // 叫暫停時，兩個計時器一起暫停
+        state.timeouts[team] -= 1;
       });
     }
 
@@ -596,31 +723,12 @@
       });
     }
 
-    function applyPeriodMinutes() {
-      const minutes = Number.parseInt(document.getElementById('periodMinutes').value, 10);
-
-      if (!Number.isInteger(minutes) || minutes < 1 || minutes > 60) {
-        return announce('每節時間請輸入 1 到 60 分鐘');
-      }
-
+    function resetTeamFouls() {
       update(() => {
-        state.periodMinutes = minutes;
-        state.gameRemaining = minutes * 60000;
-        state.gameRunning = false;
-        state.gameEndAt = 0;
+        state.fouls = { A: 0, B: 0 };
       });
 
-      announce('每節時間已套用');
-    }
-
-    function applyShotSeconds() {
-      const seconds = Number.parseInt(document.getElementById('shotSeconds').value, 10);
-
-      if (!Number.isInteger(seconds) || seconds < 1 || seconds > 60) {
-        return announce('進攻時間請輸入 1 到 60 秒');
-      }
-
-      resetShotClock(seconds);
+      announce('兩隊本節犯規已歸零');
     }
 
     function applyTimeoutRule() {
@@ -640,80 +748,143 @@
       announce('兩隊暫停數已更新');
     }
 
-    function resetGameClock() {
+    /* ========== 節次 ========== */
+
+    function changePeriod(amount) {
       update(() => {
+        state.period = Math.max(1, state.period + amount);
+        state.fouls = { A: 0, B: 0 };
+
         state.gameRunning = false;
         state.gameEndAt = 0;
+        state.gameRemaining = state.periodMinutes * 60000;
+
+        // 換節一律回到預設 24 秒，不沿用「自訂秒數」
+        state.shotRunning = false;
+        state.shotEndAt = 0;
+        state.shotRemaining = DEFAULT_SHOT_SECONDS * 1000;
+      }, true);
+
+      document.getElementById('shotSeconds').value = DEFAULT_SHOT_SECONDS;
+    }
+
+    /* ========== 計時器（比賽時間與進攻時間同步） ========== */
+
+    // 兩個計時器一起暫停：把「剩餘時間」存起來
+    function pauseClocks(now) {
+      if (state.gameRunning) {
+        state.gameRemaining = Math.max(0, state.gameEndAt - now);
+        state.gameRunning = false;
+        state.gameEndAt = 0;
+      }
+
+      if (state.shotRunning) {
+        state.shotRemaining = Math.max(0, state.shotEndAt - now);
+        state.shotRunning = false;
+        state.shotEndAt = 0;
+      }
+    }
+
+    // 兩個計時器一起開始：算出各自的「預計結束時間」
+    function startClocks(now) {
+      if (state.gameRemaining <= 0) return;
+
+      state.gameRunning = true;
+      state.gameEndAt = now + state.gameRemaining;
+
+      if (state.shotRemaining > 0) {
+        state.shotRunning = true;
+        state.shotEndAt = now + state.shotRemaining;
+      }
+    }
+
+    function toggleGameClock() {
+      ensureAudio();   // 在使用者操作當下準備好音效
+
+      apply(() => {
+        const now = Date.now();
+
+        if (state.gameRunning) {
+          pauseClocks(now);
+        } else {
+          startClocks(now);
+        }
+      });
+
+      ensureTicker();
+    }
+
+    function resetGameClock() {
+      apply(() => {
+        pauseClocks(Date.now());
         state.gameRemaining = state.periodMinutes * 60000;
       });
     }
 
-    function toggleGameClock() {
-      update(() => {
-        if (state.gameRunning) {
-          state.gameRemaining = Math.max(0, state.gameEndAt - Date.now());
-          state.gameRunning = false;
-        } else if (state.gameRemaining > 0) {
-          state.gameRunning = true;
-          state.gameEndAt = Date.now() + state.gameRemaining;
-        }
+    function applyPeriodMinutes() {
+      const minutes = Number.parseInt(document.getElementById('periodMinutes').value, 10);
+
+      if (!Number.isInteger(minutes) || minutes < 1 || minutes > 60) {
+        return announce('每節時間請輸入 1 到 60 分鐘');
+      }
+
+      apply(() => {
+        pauseClocks(Date.now());
+        state.periodMinutes = minutes;
+        state.gameRemaining = minutes * 60000;
       });
 
-      ensureTicker();
+      announce('每節時間已套用');
     }
 
     function resetShotClock(seconds) {
-      update(() => {
-        state.shotRunning = false;
-        state.shotEndAt = 0;
+      apply(() => {
         state.shotRemaining = seconds * 1000;
-      });
-    }
 
-    function toggleShotClock() {
-      update(() => {
-        if (state.shotRunning) {
-          state.shotRemaining = Math.max(0, state.shotEndAt - Date.now());
-          state.shotRunning = false;
-        } else if (state.shotRemaining > 0) {
+        if (state.gameRunning) {
+          // 比賽進行中重設：進攻時間從頭接著倒數
           state.shotRunning = true;
           state.shotEndAt = Date.now() + state.shotRemaining;
+        } else {
+          state.shotRunning = false;
+          state.shotEndAt = 0;
         }
       });
 
       ensureTicker();
     }
 
-    function resetTeamFouls() {
-      update(() => {
-        state.fouls = { A: 0, B: 0 };
-      });
+    function applyShotSeconds() {
+      const seconds = Number.parseInt(document.getElementById('shotSeconds').value, 10);
 
-      announce('兩隊本節犯規已歸零');
+      if (!Number.isInteger(seconds) || seconds < 1 || seconds > 60) {
+        return announce('進攻時間請輸入 1 到 60 秒');
+      }
+
+      resetShotClock(seconds);
     }
 
     function resetGame() {
       if (!confirm('確定重新開始比賽？比分、犯規、暫停與計時都會重設。')) return;
 
-      snapshot();
+      snapshot(true);
 
-      const names = {
+      const keep = {
         nameA: state.nameA,
-        nameB: state.nameB
+        nameB: state.nameB,
+        soundOn: state.soundOn,
+        periodMinutes: state.periodMinutes,
+        timeoutsPerTeam: state.timeoutsPerTeam
       };
 
       state = {
-        ...structuredClone(DEFAULTS),
-        ...names,
-        periodMinutes: state.periodMinutes,
-        gameRemaining: state.periodMinutes * 60000,
-        timeoutsPerTeam: state.timeoutsPerTeam,
-        timeouts: {
-          A: state.timeoutsPerTeam,
-          B: state.timeoutsPerTeam
-        }
+        ...clone(DEFAULTS),
+        ...keep,
+        gameRemaining: keep.periodMinutes * 60000,
+        timeouts: { A: keep.timeoutsPerTeam, B: keep.timeoutsPerTeam }
       };
 
+      document.getElementById('shotSeconds').value = DEFAULT_SHOT_SECONDS;
       saveState();
       announce('比賽已重新開始');
     }
@@ -725,6 +896,8 @@
 
       return `${String(minutes).padStart(2, '0')}:${String(remainder).padStart(2, '0')}`;
     }
+
+    /* ========== 畫面更新 ========== */
 
     function render() {
       document.getElementById('scoreA').textContent = state.scores.A;
@@ -738,74 +911,150 @@
       document.getElementById('foulsB').classList.toggle('warn', state.fouls.B >= 5);
       document.getElementById('periodLabel').textContent = `第 ${state.period} 節`;
 
-      const periodInput = document.getElementById('periodMinutes');
-      const timeoutInput = document.getElementById('timeoutsPerTeam');
-      if (document.activeElement !== periodInput) periodInput.value = state.periodMinutes;
-      if (document.activeElement !== timeoutInput) timeoutInput.value = state.timeoutsPerTeam;
-      document.getElementById('nameA').value = state.nameA;
-      document.getElementById('nameB').value = state.nameB;
+      // 使用者正在輸入的欄位，不要被畫面更新蓋掉
+      const fields = [
+        ['periodMinutes', state.periodMinutes],
+        ['timeoutsPerTeam', state.timeoutsPerTeam],
+        ['nameA', state.nameA],
+        ['nameB', state.nameB]
+      ];
 
-      document.getElementById('gameClock').textContent = formatClock(state.gameRemaining);
-      document.getElementById('gameClock').classList.toggle('expired', state.gameRemaining <= 0);
-      document.getElementById('gameToggle').textContent = state.gameRunning
+      fields.forEach(([id, value]) => {
+        const input = document.getElementById(id);
+        if (document.activeElement !== input) input.value = value;
+      });
+
+      const gameClock = document.getElementById('gameClock');
+      gameClock.textContent = formatClock(state.gameRemaining);
+      gameClock.classList.toggle('expired', state.gameRemaining <= 0);
+
+      const gameToggle = document.getElementById('gameToggle');
+      gameToggle.textContent = state.gameRunning
         ? '暫停'
         : (state.gameRemaining <= 0 ? '時間到' : '開始');
-      document.getElementById('gameToggle').disabled = state.gameRemaining <= 0 && !state.gameRunning;
+      gameToggle.disabled = state.gameRemaining <= 0 && !state.gameRunning;
 
-      document.getElementById('shotClock').textContent =
-        String(Math.ceil(Math.max(0, state.shotRemaining) / 1000));
-      document.getElementById('shotClock').classList.toggle('expired', state.shotRemaining <= 0);
-      document.getElementById('shotToggle').textContent = state.shotRunning
-        ? '暫停'
-        : (state.shotRemaining <= 0 ? '時間到' : '開始');
-      document.getElementById('shotToggle').disabled = state.shotRemaining <= 0 && !state.shotRunning;
+      const shotClock = document.getElementById('shotClock');
+      shotClock.textContent = String(Math.ceil(Math.max(0, state.shotRemaining) / 1000));
+      shotClock.classList.toggle('expired', state.shotRemaining <= 0);
 
       const possessionName = state.possession === 'A' ? state.nameA : state.nameB;
       document.getElementById('possessionBtn').textContent = `${possessionName}持球　⇄`;
       document.getElementById('undoBtn').disabled = history.length === 0;
+      document.getElementById('soundBtn').textContent = state.soundOn ? '🔊 提示音：開' : '🔇 提示音：關';
     }
+
+    /* ========== 每 0.1 秒檢查一次計時 ========== */
 
     function ensureTicker() {
       if (intervalId !== null) return;
-
-      intervalId = setInterval(() => {
-        let changed = false;
-
-        if (state.gameRunning) {
-          state.gameRemaining = Math.max(0, state.gameEndAt - Date.now());
-
-          if (state.gameRemaining <= 0) {
-            state.gameRunning = false;
-            state.gameEndAt = 0;
-            announce('本節時間到');
-          }
-
-          changed = true;
-        }
-
-        if (state.shotRunning) {
-          state.shotRemaining = Math.max(0, state.shotEndAt - Date.now());
-
-          if (state.shotRemaining <= 0) {
-            state.shotRunning = false;
-            state.shotEndAt = 0;
-            announce('進攻時間到');
-          }
-
-          changed = true;
-        }
-
-        if (changed) {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-          render();
-        }
-
-        if (!state.gameRunning && !state.shotRunning) {
-          clearInterval(intervalId);
-          intervalId = null;
-        }
-      }, 100);
+      intervalId = setInterval(tick, 100);
     }
+
+    function stopTicker() {
+      clearInterval(intervalId);
+      intervalId = null;
+    }
+
+    function tick() {
+      if (!state.gameRunning && !state.shotRunning) {
+        stopTicker();
+        return;
+      }
+
+      const now = Date.now();
+
+      if (state.gameRunning) state.gameRemaining = Math.max(0, state.gameEndAt - now);
+      if (state.shotRunning) state.shotRemaining = Math.max(0, state.shotEndAt - now);
+
+      let alarm = null;
+
+      if (state.gameRunning && state.gameRemaining <= 0) {
+        alarm = 'game';
+      } else if (state.shotRunning && state.shotRemaining <= 0) {
+        alarm = 'shot';
+      }
+
+      if (alarm) {
+        pauseClocks(now);   // 任何一個歸零，兩個計時器一起停
+        playBuzzer(alarm);
+        announce(alarm === 'game' ? '本節時間到' : '進攻時間到');
+      }
+
+      persist();
+      render();
+
+      if (!state.gameRunning && !state.shotRunning) stopTicker();
+    }
+
+    /* ========== 提示音（Web Audio API，不需要音檔） ========== */
+
+    function ensureAudio() {
+      try {
+        if (!audioCtx) {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return null;
+          audioCtx = new AudioContextClass();
+        }
+
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        return audioCtx;
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function beep(frequency, delay, duration, volume, wave) {
+      const ctx = ensureAudio();
+      if (!ctx) return;
+
+      try {
+        const start = ctx.currentTime + delay;
+        const oscillator = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        oscillator.type = wave;
+        oscillator.frequency.value = frequency;
+
+        // 音量先淡入、再淡出，避免「啪」的爆音
+        gain.gain.setValueAtTime(0.0001, start);
+        gain.gain.exponentialRampToValueAtTime(volume, start + 0.015);
+        gain.gain.setValueAtTime(volume, start + duration - 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+        oscillator.start(start);
+        oscillator.stop(start + duration + 0.02);
+      } catch (error) {
+        // 音效失敗不影響計分
+      }
+    }
+
+    function playBuzzer(kind) {
+      if (!state.soundOn) return;
+
+      if (kind === 'game') {
+        // 比賽時間到：一聲長鳴
+        beep(440, 0, 1.5, 0.3, 'sawtooth');
+      } else {
+        // 進攻時間到：三聲短音
+        beep(880, 0, 0.16, 0.25, 'square');
+        beep(880, 0.26, 0.16, 0.25, 'square');
+        beep(880, 0.52, 0.16, 0.25, 'square');
+      }
+    }
+
+    function toggleSound() {
+      state.soundOn = !state.soundOn;
+      saveState();
+
+      if (state.soundOn) {
+        beep(660, 0, 0.18, 0.2, 'sine');   // 開啟時響一聲，讓使用者確認音量
+      }
+    }
+
+    /* ========== 其他功能 ========== */
 
     function toggleFullscreen() {
       if (!document.fullscreenElement) {
@@ -825,18 +1074,17 @@
       }, 2200);
     }
 
-    document.addEventListener('keydown', event => {
-      const tag = event.target.tagName;
+    function isTyping(target) {
+      const tag = target.tagName;
+      return tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT';
+    }
 
-      if (
-        tag === 'INPUT' ||
-        tag === 'TEXTAREA' ||
-        event.ctrlKey ||
-        event.altKey ||
-        event.metaKey
-      ) {
+    document.addEventListener('keydown', event => {
+      if (isTyping(event.target) || event.ctrlKey || event.altKey || event.metaKey) {
         return;
       }
+
+      if (event.repeat) return;   // 長按不重複觸發
 
       const key = event.key.toLowerCase();
 
@@ -846,7 +1094,8 @@
         '3': () => addScore('A', 3),
         q: () => addScore('B', 1),
         w: () => addScore('B', 2),
-        e: () => addScore('B', 3)
+        e: () => addScore('B', 3),
+        z: () => undo()
       };
 
       if (shortcuts[key]) {
@@ -855,13 +1104,28 @@
       } else if (event.code === 'Space') {
         event.preventDefault();
         toggleGameClock();
-      } else if (key === 'z') {
-        undo();
       }
     });
 
+    // 空白鍵放開時，不讓「剛點過的按鈕」被誤觸發
+    document.addEventListener('keyup', event => {
+      if (event.code === 'Space' && !isTyping(event.target)) {
+        event.preventDefault();
+      }
+    });
+
+    // 用滑鼠點完按鈕後取消焦點，避免之後按空白鍵又點了同一顆按鈕
+    document.addEventListener('click', event => {
+      const button = event.target.closest('button');
+      if (button && event.detail > 0) button.blur();
+    });
+
+    // 瀏覽器規定要先有使用者操作才能發聲，所以第一次點擊或按鍵時先準備好
+    document.addEventListener('pointerdown', ensureAudio, { once: true });
+    document.addEventListener('keydown', ensureAudio, { once: true });
+
     render();
-    ensureTicker();
+    if (state.gameRunning || state.shotRunning) ensureTicker();
   </script>
 </body>
 </html>
